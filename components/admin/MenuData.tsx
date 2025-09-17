@@ -17,7 +17,7 @@ const menuItems: MenuItem[] = [
   },
   {
     label: "Posts",
-    href: "/admin/posts",
+    href: "/admin/post",
     icon: Image,
     roles: ["SUPERADMIN"],
   },

@@ -1,10 +1,12 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
+import ErrorPage from "@/app/error";
 import Loading from "@/app/loading";
 import UserTable from "@/components/ui/UserTable";
 import type { User } from "@/types/user";
 import api from "@/utils/axios";
-export default function UsersPage() {
+
+const UsersPage = () => {
   const {
     data: users,
     isLoading,
@@ -19,10 +21,11 @@ export default function UsersPage() {
   });
 
   if (isLoading) return <Loading />;
-  if (isError || !users) return "User Not Found";
+  if (isError || !users) return <ErrorPage message="User Not Found" />;
   return (
     <div className="p-6">
       <UserTable users={users} />
     </div>
   );
-}
+};
+export default UsersPage;
