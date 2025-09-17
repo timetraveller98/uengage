@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/ui/Footer";
 import Header from "@/components/ui/Header";
+import Providers from "@/providers/providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,17 +38,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <Toaster
-          toastOptions={{
-            style: {
-              background: "rgb(51 65 85)",
-              color: "#fff",
-            },
-          }}
-        />
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Toaster
+            toastOptions={{
+              style: {
+                background: "rgb(51 65 85)",
+                color: "#fff",
+              },
+            }}
+          />
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
