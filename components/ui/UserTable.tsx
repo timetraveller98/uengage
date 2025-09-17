@@ -1,5 +1,6 @@
 "use client";
 import debounce from "lodash.debounce";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FiEye } from "react-icons/fi";
 import type { User } from "@/types/user";
@@ -13,6 +14,7 @@ interface Props {
 export default function UserTable({ users, pageSize = 5 }: Props) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const router = useRouter();
 
   const filteredUsers = useMemo(() => {
     return users.filter((u) =>
@@ -62,10 +64,15 @@ export default function UserTable({ users, pageSize = 5 }: Props) {
                 <td className="p-3">{user.company.name}</td>
                 <td className="p-3 text-center">
                   <button
+                    onClick={() => {
+                      router.push(`/admin/user/${user.id}`);
+                    }}
                     type="button"
-                    className="text-blue-500 hover:text-blue-700 transition"
+                    aria-label="View details"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
                   >
-                    <FiEye className="w-5 h-5 inline-block" />
+                    <FiEye className="w-5 h-5" />
+                    <span className="text-sm font-medium">View</span>
                   </button>
                 </td>
               </tr>

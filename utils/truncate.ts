@@ -1,5 +1,7 @@
-export const truncateWords = (text: string, wordLimit: number = 5): string => {
-  const words = text.split(" ");
-  if (words.length <= wordLimit) return text;
-  return `${words.slice(0, wordLimit).join(" ")}...`;
+export const truncateLetters = (
+  text: string,
+  letterLimit: number = 10,
+): string => {
+  if (text.length <= letterLimit) return text;
+  return `${text.slice(0, letterLimit)}...`;
 };

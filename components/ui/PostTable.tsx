@@ -1,11 +1,10 @@
 "use client";
-
 import debounce from "lodash.debounce";
 import { useMemo, useState } from "react";
-import { FiEye } from "react-icons/fi";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
-import { truncateWords } from "@/utils/truncate";
+import { truncateLetters } from "@/utils/truncate";
+import DetailsModal from "./DetailsModal";
 import Pagination from "./Pagination";
 
 export interface PostWithUser extends Post {
@@ -65,17 +64,12 @@ const PostTable = ({ posts, pageSize = 5 }: PostTableProps) => {
           <tbody className="divide-y divide-gray-200">
             {paginatedPosts.map((post) => (
               <tr key={post.id} className="hover:bg-gray-50 transition">
-                <td className="p-3">{post.user.name}</td>
-                <td className="p-3">{truncateWords(post.title)}</td>
-                <td className="p-3">{truncateWords(post.body)}</td>
+                <td className="p-3">{truncateLetters(post.user.name, 30)}</td>
+                <td className="p-3">{truncateLetters(post.title, 30)}</td>
+                <td className="p-3">{truncateLetters(post.body, 40)}</td>
 
                 <td className="p-3 text-center">
-                  <button
-                    type="button"
-                    className="text-blue-500 hover:text-blue-700 transition"
-                  >
-                    <FiEye className="w-5 h-5 inline-block" />
-                  </button>
+                  <DetailsModal post={post} />
                 </td>
               </tr>
             ))}
