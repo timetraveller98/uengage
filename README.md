@@ -78,7 +78,6 @@ Folder Structure
 │       ├── Footer.tsx
 │       ├── Header.tsx
 │       ├── Input.tsx
-│       ├── Menu.tsx
 │       ├── Navbar.tsx
 │       ├── NullData.tsx
 │       ├── Pagination.tsx
