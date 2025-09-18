@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body>
+      <body className="bg-white">
         <Providers>
           <Toaster
             toastOptions={{

@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import LoginForm from "@/app/(auth)/login/LoginPage";
 import Menu from "@/components/admin/Menu";
 import NullData from "@/components/ui/NullData";
+import Loading from "../loading";
 export const metadata = {
   title: {
     default: "Admin Dashboard",
@@ -39,7 +40,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   if (!currentUser) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-        <Suspense fallback={<p>Loading login...</p>}>
+        <Suspense fallback={<Loading />}>
           <LoginForm />
         </Suspense>
       </div>

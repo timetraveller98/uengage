@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Loading from "@/app/loading";
 import SignupForm from "./SignupForm";
 export const metadata = {
   title: "Sign Up",
@@ -12,7 +13,7 @@ export const metadata = {
 const SignupPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <Suspense fallback={<p>Loading signup...</p>}>
+      <Suspense fallback={<Loading />}>
         <SignupForm />
       </Suspense>
     </div>

@@ -7,10 +7,12 @@ const Header = async () => {
   const session = await getServerSession(authOptions);
   const currentUser = await getCurrentUser();
   return (
-    <NavbarData
-      email={session?.user.email}
-      currentRole={currentUser?.role ?? "USER"}
-    />
+    <div className="sticky top-0">
+      <NavbarData
+        email={session?.user.email}
+        currentRole={currentUser?.role ?? "USER"}
+      />{" "}
+    </div>
   );
 };
 export default Header;

@@ -10,7 +10,7 @@ import { setUsers } from "@/actions/getUsers";
 import { Input } from "@/components/ui/Input";
 import { type SignupSchema, signupSchema } from "@/libs/validations";
 
-export default function SignupForm() {
+const SignupForm = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -90,4 +90,5 @@ export default function SignupForm() {
       </p>
     </div>
   );
-}
+};
+export default SignupForm;

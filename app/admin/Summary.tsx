@@ -54,9 +54,9 @@ const Summary: FC<SummaryProps> = ({ users, posts }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
       <div className="col-span-1 md:col-span-2 bg-white/90 p-6 rounded-2xl shadow-md">
-        <div className="h-72">
+        <div className="h-60 sm:h-72 md:h-96">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -65,7 +65,7 @@ const Summary: FC<SummaryProps> = ({ users, posts }) => {
                 nameKey="label"
                 cx="50%"
                 cy="50%"
-                outerRadius={100}
+                outerRadius="70%"
                 label={({ name, percent }: CustomPieLabelProps) =>
                   `${name} ${(percent ? percent * 100 : 0).toFixed(0)}%`
                 }
@@ -92,6 +92,27 @@ const Summary: FC<SummaryProps> = ({ users, posts }) => {
               />
             </PieChart>
           </ResponsiveContainer>
+        </div>
+        <div className="grid grid-cols-2 gap-4 mt-6">
+          {summaryData.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => router.push(item.url)}
+                className="flex flex-col items-center justify-center bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <Icon className="w-6 h-6 mb-2" style={{ color: item.color }} />
+                <span className="text-sm font-medium text-gray-600">
+                  {item.label}
+                </span>
+                <span className="text-lg font-semibold text-gray-800">
+                  {FormatNumber(item.value)}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

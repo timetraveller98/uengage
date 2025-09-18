@@ -70,7 +70,7 @@ const PostTable = ({ posts, pageSize = 5 }: PostTableProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center mb-4 gap-4">
+      <div className="flex justify-end items-center mb-4 gap-4">
         <select
           value={selectedUser}
           onChange={(e) => {
@@ -86,12 +86,6 @@ const PostTable = ({ posts, pageSize = 5 }: PostTableProps) => {
             </option>
           ))}
         </select>
-        <input
-          type="text"
-          placeholder="Search by name or email..."
-          className="w-64 p-2 pl-3 pr-10 rounded-full border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 focus:outline-none transition duration-200 text-sm"
-          onChange={(e) => handleSearch(e.target.value)}
-        />
       </div>
       <div className="overflow-x-auto shadow-md rounded-lg">
         <table className="min-w-full bg-white divide-y divide-gray-200">

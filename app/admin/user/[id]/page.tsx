@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: DynamicProps) {
       siteName: "uEngage",
       images: [
         {
-          url: "/logo.png",
+          url: "/logo.svg",
           width: 1200,
           height: 630,
           alt: `${user.name} profile preview`,
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: DynamicProps) {
       card: "summary_large_image",
       title: `${user.name} | Profile`,
       description: `Check out ${user.name}'s profile on My App.`,
-      images: ["/logo.png"],
+      images: ["/logo.svg"],
     },
     alternates: {
       canonical: `https://uengage-phi.vercel.app/users/${id}`,

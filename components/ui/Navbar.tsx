@@ -2,97 +2,109 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import menuItems from "@/components/admin/MenuData";
 import DropdownMenu from "./Menu";
 
 interface NavbarProps {
   email: string | null | undefined;
   currentRole?: string;
 }
-const Navbar: React.FC<NavbarProps> = ({ email }) => {
+
+const Navbar: React.FC<NavbarProps> = ({ email, currentRole }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
+
+  const allowedMenu = menuItems.filter((item) =>
+    currentRole ? item.roles.includes(currentRole) : false,
+  );
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 py-2 w-full border-b bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+    <div className="sticky top-0 py-2 z-50 w-full bg-gray-100/95 backdrop-blur-sm shadow-md transition-all duration-300">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="logo"
-            width={50}
+            width={150}
             height={50}
             priority
-            className="object-contain rounded-full"
+            className="object-contain p-1"
           />
         </Link>
         <div className="hidden md:flex items-center gap-4">
           <DropdownMenu email={email} />
         </div>
-        <div className="md:hidden flex items-center">
-          <button
-            type="button"
-            onClick={toggleMobileMenu}
-            className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-100 transition"
-          >
-            <svg
-              className="w-6 h-6 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
+        {isMobile && (
+          <div className="md:hidden flex items-center">
+            <button
+              type="button"
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 hover:bg-gray-200 transition"
             >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+              <svg
+                className="w-6 h-6 text-gray-700"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gray shadow-lg z-50 transform transition-transform duration-300 ease-in-out md:hidden
-        ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
-      >
-        <div className="flex flex-col mt-16 space-y-4 px-4">
-          <div className="flex flex-col items-center space-y-4">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2 px-4 rounded-md hover:bg-gray-100 transition"
-            >
-              Home
-            </Link>
+      {isMobile && isMobileMenuOpen && (
+        <div className="absolute top-16 left-0  mt-2 w-full bg-gray-50 z-50 shadow-md">
+          <div className="flex flex-col items-center py-3">
+            {allowedMenu.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-1 pt-4 text-[16px] cursor-pointer px-4 rounded-md hover:bg-gray-100 transition-colors text-gray-700"
+              >
+                {item.icon && <item.icon className="w-5 h-5" />}
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+          <div className="py-3 flex justify-center bg-gray-50">
             <DropdownMenu email={email} />
-            <Link
-              href="/about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2 px-4 rounded-md hover:bg-gray-100 transition"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2 px-4 rounded-md hover:bg-gray-100 transition"
-            >
-              Contact
-            </Link>
           </div>
         </div>
-      </div>
-    </header>
+      )}
+    </div>
   );
 };
 
