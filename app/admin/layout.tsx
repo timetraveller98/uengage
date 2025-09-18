@@ -6,7 +6,7 @@ import Menu from "@/components/admin/Menu";
 import NullData from "@/components/ui/NullData";
 export const metadata = {
   title: {
-    default: "uEngage Admin Dashboard",
+    default: "Admin Dashboard",
     template: "%s | uEngage",
   },
   description:

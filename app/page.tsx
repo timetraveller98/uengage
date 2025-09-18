@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Home",
+  title: "uEngage",
   description:
     "Explore all users on uEngage. A modern Next.js 15 project with Prisma, NextAuth, and TailwindCSS.",
   keywords: [
