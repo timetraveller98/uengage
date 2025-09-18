@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ErrorPage from "@/app/error";
 import Loading from "@/app/loading";
+import AdminHeading from "@/components/ui/AdminHeading";
 import PostTable from "@/components/ui/PostTable";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
@@ -38,6 +39,7 @@ const PostPage = () => {
 
   return (
     <div className="p-6">
+      <AdminHeading center title={"Posts List"} />
       <PostTable posts={posts} />
     </div>
   );

@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ErrorPage from "@/app/error";
 import Loading from "@/app/loading";
+import AdminHeading from "@/components/ui/AdminHeading";
 import UserTable from "@/components/ui/UserTable";
 import type { User } from "@/types/user";
 import api from "@/utils/axios";
@@ -24,6 +25,7 @@ const UsersPage = () => {
   if (isError || !users) return <ErrorPage message="User Not Found" />;
   return (
     <div className="p-6">
+      <AdminHeading center title={"Users List"} />
       <UserTable users={users} />
     </div>
   );
