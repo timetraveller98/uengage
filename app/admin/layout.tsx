@@ -11,7 +11,7 @@ export const metadata = {
   },
   description:
     "Create a scalable admin dashboard using Next.js (App Router) and React.js. Focused on clean architecture, component reusability, SEO readiness, and state management.",
-  robots: "index, follow",
+  robots: "noindex, nofollow",
   keywords: [
     "uEngage Admin Dashboard",
     "Next.js Admin Dashboard",

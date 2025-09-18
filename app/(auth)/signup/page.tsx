@@ -4,6 +4,9 @@ export const metadata = {
   title: "Sign Up",
   description:
     "Create your account to access the uEngage Admin Dashboard securely.",
+  alternates: {
+    canonical: "https://uengage-phi.vercel.app/signup",
+  },
 };
 
 const SignupPage = () => {

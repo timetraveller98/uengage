@@ -54,10 +54,7 @@ export async function generateMetadata({ params }: DynamicProps) {
     alternates: {
       canonical: `https://uengage-phi.vercel.app/users/${id}`,
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: "noindex, nofollow",
   };
 }
 

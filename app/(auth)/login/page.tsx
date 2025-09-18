@@ -3,6 +3,9 @@ import LoginForm from "./LoginPage";
 export const metadata = {
   title: "Login",
   description: "Login to access your uEngage Admin Dashboard securely.",
+  alternates: {
+    canonical: "https://uengage-phi.vercel.app/login",
+  },
 };
 const LoginPage = () => {
   return (

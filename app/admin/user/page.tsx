@@ -6,6 +6,15 @@ import UserTable from "@/components/ui/UserTable";
 import type { User } from "@/types/user";
 import api from "@/utils/axios";
 
+export const metadata = {
+  title: "Users",
+  description: "Explore all users on uEngage.",
+  alternates: {
+    canonical: "https://uengage-phi.vercel.app/admin/user",
+  },
+  robots: "noindex, nofollow",
+};
+
 const UsersPage = () => {
   const {
     data: users,

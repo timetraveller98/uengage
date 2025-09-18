@@ -1,0 +1,27 @@
+{
+  "name": "uEngage",
+  "short_name": "uEngage",
+  "description": "Scalable Next.js 15 project with Prisma, NextAuth, and TailwindCSS. Enterprise-grade architecture with SEO and PWA support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}

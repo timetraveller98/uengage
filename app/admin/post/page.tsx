@@ -11,6 +11,15 @@ interface PostWithUser extends Post {
   user: User;
 }
 
+export const metadata = {
+  title: "Posts",
+  description: "Explore the latest posts created by users on uEngage.",
+  alternates: {
+    canonical: "https://uengage-phi.vercel.app/admin/post",
+  },
+  robots: "noindex, nofollow",
+};
+
 const PostPage = () => {
   const {
     data: posts,

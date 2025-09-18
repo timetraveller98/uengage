@@ -40,7 +40,9 @@ Project Structure
 │   ├── layout.tsx                    # Root layout
 │   ├── loading.tsx                   # Global loading state
 │   ├── not-found.tsx                 # 404 page
-│   └── page.tsx                      # Home page
+│   ├── page.tsx                      # Home page
+│   ├── robots.ts                    # search engine crawlers (Google, Bing, etc.)
+│   └── sitemap.ts                    # Sitemap
 │
 ├── 📂 components/                    # Reusable Components
 │   ├── 📂 admin/                     # Admin-specific components
@@ -74,7 +76,8 @@ Project Structure
 │   └── Providers.tsx                 # React Query, Theme, Session providers
 │
 ├── 📂 public/                        # Static assets
-│   └── logo.png
+│   ├── manifest.json                 # PWA
+│   └── logo.png                      # Logo Image
 │
 ├── 📂 styles/
 │   └── globals.css                   # Global styles
