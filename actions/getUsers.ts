@@ -44,14 +44,3 @@ export async function setUsers(formData: {
     return { success: false, message: "Failed to register user." };
   }
 }
-// Fetch Users
-
-export default async function getUsers() {
-  try {
-    const users = await db.user.findMany();
-    return users;
-  } catch (error: unknown) {
-    console.error("Error fetching users:", error);
-    return [];
-  }
-}

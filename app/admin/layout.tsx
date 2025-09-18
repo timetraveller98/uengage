@@ -1,7 +1,7 @@
 import type React from "react";
 import { Suspense } from "react";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import LoginForm from "@/app/login/LoginPage";
+import LoginForm from "@/app/(auth)/login/LoginPage";
 import Menu from "@/components/admin/Menu";
 import NullData from "@/components/ui/NullData";
 export const metadata = {
