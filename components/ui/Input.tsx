@@ -26,7 +26,7 @@ export const Input: React.FC<InputProps> = ({
           {...registration}
           {...props}
           type={isPassword ? (showPassword ? "text" : "password") : props.type}
-          className={`rounded-md border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 w-full ${
+          className={`rounded-md border px-3 py-2 text-sm shadow-sm focus:outline-none  w-full ${
             error
               ? "border-red-500 focus:ring-red-400"
               : "border-gray-300 focus:ring-blue-500"
@@ -37,9 +37,9 @@ export const Input: React.FC<InputProps> = ({
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-[38px] text-gray-400"
+          className="absolute right-3 top-[28px] text-gray-400"
         >
-          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          {showPassword ? <EyeOff size={21} /> : <Eye size={21} />}
         </button>
       )}
       {error && <p className="text-xs text-red-500">{error}</p>}
