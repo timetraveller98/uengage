@@ -50,11 +50,11 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
     return <NullData title="Oops! Access Denied" />;
   }
   return (
-    <div className="h-screen flex" id="AdminImage">
+    <div className="h-screen flex">
       <div className="hidden md:block w-[18%]">
         <Menu role={currentUser?.role} />
       </div>
-      <div className="w-[100%] md:w-[82%] overflow-scroll flex flex-col">
+      <div className="w-[100%] md:w-[82%] overflow-scroll bg-white-100 flex flex-col">
         {children}
       </div>
     </div>

@@ -14,14 +14,20 @@ interface SidebarProps {
   currentUserId: string;
   role: string;
 }
+
 const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const router = useRouter();
-  const toggleDropdown = useCallback((label: string) => {
-    setOpenDropdown((prev) => (prev === label ? null : label));
-  }, []);
+
+  const toggleDropdown = useCallback(
+    (label: string) =>
+      setOpenDropdown((prev) => (prev === label ? null : label)),
+    [],
+  );
+
   const handleCloseSidebar = useCallback(() => setIsOpen(false), []);
+
   const handleLogout = useCallback(() => {
     localStorage.clear();
     const callbackUrl = `${window.location.origin}/login`;
@@ -30,6 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
       setIsOpen(false);
     });
   }, [router]);
+
   const filteredMenuItems = useMemo(
     () => menuItems.filter((item) => item.roles.includes(role)),
     [role],
@@ -37,7 +44,8 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
 
   return (
     <>
-      <header className="flex justify-between items-center bg-white shadow-md px-4 py-2 sticky top-0 z-40">
+      {/* Header */}
+      <header className="sticky top-0 z-40 flex items-center justify-between bg-white shadow-md px-4 py-2">
         <Link
           href={currentUserId ? "/admin" : "/"}
           className="flex items-center"
@@ -53,24 +61,30 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
           {isOpen ? <MdClose size={28} /> : <MdMenu size={28} />}
         </button>
       </header>
+
+      {/* Overlay */}
       {isOpen && (
         <button
           type="button"
           aria-label="Close sidebar overlay"
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 cursor-default"
+          className="fixed inset-0 bg-black/40 z-40"
           onClick={handleCloseSidebar}
         />
       )}
 
+      {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg transform transition-transform z-50 ${
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-center py-4 border-b">
-          <Image src="/logo.png" alt="logo" height={60} width={60} />
+        {/* Logo */}
+        <div className="flex justify-center py-6 border-b">
+          <Image src="/logo.png" alt="logo" height={60} width={60} priority />
         </div>
-        <nav className="p-4 flex flex-col gap-2 overflow-y-auto">
+
+        {/* Navigation */}
+        <nav className="p-4 flex flex-col gap-1 overflow-y-auto">
           {filteredMenuItems.map((item) => (
             <div key={item.label} className="flex flex-col">
               {item.subItems ? (
@@ -78,9 +92,9 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
                   <button
                     type="button"
                     onClick={() => toggleDropdown(item.label)}
-                    className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-gray-100 text-left"
+                    className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-gray-100 transition text-gray-700 font-medium"
                   >
-                    <span className="flex items-center gap-2 text-gray-700">
+                    <span className="flex items-center gap-2">
                       {item.icon && <item.icon className="h-5 w-5" />}
                       {item.label}
                     </span>
@@ -91,8 +105,9 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
                     )}
                   </button>
 
+                  {/* Submenu */}
                   {openDropdown === item.label && (
-                    <div className="ml-6 flex flex-col gap-1">
+                    <div className="ml-6 mt-1 flex flex-col gap-1">
                       {item.subItems
                         .filter((sub) => sub.roles.includes(role))
                         .map((subItem) => (
@@ -100,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
                             key={subItem.label}
                             href={subItem.href || "#"}
                             onClick={handleCloseSidebar}
-                            className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100"
+                            className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 transition"
                           >
                             {subItem.icon && (
                               <subItem.icon className="h-4 w-4" />
@@ -115,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
                 <Link
                   href={item.href}
                   onClick={handleCloseSidebar}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition font-medium"
                 >
                   {item.icon && <item.icon className="h-5 w-5" />}
                   {item.label}
@@ -124,6 +139,8 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
             </div>
           ))}
         </nav>
+
+        {/* Footer Action */}
         <div className="p-4 border-t flex justify-center">
           {role ? (
             <Button
@@ -131,7 +148,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
               onClick={handleLogout}
               color="inherit"
               size="small"
-              className="flex items-center gap-2 border border-gray-300 px-3 py-1 text-gray-700 hover:bg-gray-100"
+              className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100 transition"
             >
               <LogOut className="w-4 h-4" />
               Logout
@@ -142,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, currentUserId }) => {
               onClick={() => router.push("/login")}
               color="inherit"
               size="small"
-              className="flex items-center gap-2 border border-gray-300 px-3 py-1 text-gray-700 hover:bg-gray-100"
+              className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100 transition"
             >
               <LogIn className="w-4 h-4" />
               Login

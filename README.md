@@ -1,11 +1,33 @@
 
-uEngage
+uEngage | https://uengage-phi.vercel.app
 
 uEngage is a Next.js 15 (App Router) project built with TypeScript, Prisma, NextAuth, and TailwindCSS.  
 It follows a scalable folder structure and uses server actions, role-based middleware, and modular components to ensure maintainability and production readiness.
 
+🔑 Login Functionality
 
-Project Structure
+User Authentication with NextAuth.js (JWT-based)
+MongoDB + Prisma ORM for user data storage
+
+Role-based Access Control (RBAC) with three roles:
+  USER(default role after signup)
+  ADMIN
+  SUPERADMIN
+
+Super Admin Default Credentials:
+  Email: admin@gmail.com
+  Password: 12345678
+
+Protected Routes:
+  Only SUPERADMINcan access /admin
+  Middleware enforces role-based access
+
+User Signup & Login
+  Users can sign up via /signup
+  After successful signup, the role is automatically set to USER
+
+
+Folder Structure
 
 📦 uengage/
 │
@@ -125,7 +147,7 @@ React Query + Providers → optimized client-side state management.
 TailwindCSS → utility-first styling for rapid UI development.
 Testing → use Jest.
 Biome → linting + formatting for consistent code quality.
-Scalable structure → clear separation between `app`, `components`, `libs`, and `utils`.
+Scalable structure → clear separation between app, components, libs, and utils.
 
 
 ⚠️ Known Limitations
