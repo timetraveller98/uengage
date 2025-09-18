@@ -67,6 +67,7 @@ Project Structure
 ├── 📂 libs/                          # Config & Helpers
 │   ├── auth.ts                       # NextAuth config
 │   ├── validations.ts                # Validations (Zod/Yup schemas)
+│   ├── validations.test.ts           # Validations Test File (Zod/Yup schemas)
 │   └── db.ts                         # Prisma helper functions
 │
 ├── 📂 prisma/
@@ -91,10 +92,15 @@ Project Structure
 ├── 📂 utils/                         # Utility Functions
 │   ├── axios.ts                      # Axios instance
 │   ├── format-number.ts              # Format Number
+│   ├── formatNumber.test.ts          # Format Number Test File
+│   ├── truncate.test.ts              # Format Number Test File
+│   ├── axios.test.ts                 # Axios instance Test File
 │   └── truncate.ts                   # Truncate text
 │
 ├── .env                              # Environment variables
 ├── biome.json                        # Biome config
+├── jest.config.ts                   # Jest config (root)
+├── jest.setup.ts                    # Jest setup (root)
 ├── middleware.ts                     # Role-based middleware
 ├── package.json
 └── tsconfig.json
@@ -104,10 +110,30 @@ Project Structure
 Framework: Next.js 15 (App Router)
 Language: TypeScript
 Auth: NextAuth.js
+Test: Jest
 Database: Prisma ORM + MongoDB
 UI: TailwindCSS
 State Management: React Query / Server Actions
 Linting/Formatting: Biome
+
+🔑 Key Decisions
+
+Next.js 15 App Router → for server components, layouts, and server actions.
+Prisma + MongoDB → flexible schema-driven database with migrations.
+NextAuth → session management with role-based access control.
+React Query + Providers → optimized client-side state management.
+TailwindCSS → utility-first styling for rapid UI development.
+Testing → use Jest.
+Biome → linting + formatting for consistent code quality.
+Scalable structure → clear separation between `app`, `components`, `libs`, and `utils`.
+
+
+⚠️ Known Limitations
+
+Basic role system → Middleware enforces roles but lacks fine-grained permissions.
+Minimal UI → Functional but limited design; can be expanded with shadcn/ui or Radix.
+Email/password only → Social logins (Google, GitHub, etc.) not implemented yet.
+
 
 🚀 Features
 
