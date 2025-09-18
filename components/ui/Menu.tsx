@@ -5,9 +5,15 @@ import { useState } from "react";
 
 interface NavbarProps {
   email: string | null | undefined;
+  onAction?: () => void;
+  currentRole?: string;
 }
 
-const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
+const DropdownMenu: React.FC<NavbarProps> = ({
+  email,
+  onAction,
+  currentRole,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -30,7 +36,9 @@ const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        onClick={toggleDropdown}
+        onClick={() => {
+          toggleDropdown();
+        }}
         className="flex items-center px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
       >
         <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-semibold mr-3">
@@ -60,17 +68,28 @@ const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
         <div className="absolute right-0 mt-2 w-45 bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50 animate-fade-in">
           {email ? (
             <div className="py-1">
-              <Link
-                href="/admin"
-                onClick={closeDropdown}
-                className="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 transition"
-              >
-                Dashboard
-              </Link>
-              <hr className="my-1" />
+              {currentRole === "SSUPERADMIN" && (
+                <>
+                  <Link
+                    href="/admin"
+                    onClick={() => {
+                      closeDropdown();
+                      onAction?.();
+                    }}
+                    className="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 transition"
+                  >
+                    Dashboard
+                  </Link>
+                  <hr className="my-1" />
+                </>
+              )}
+
               <button
                 type="button"
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  onAction?.();
+                }}
                 className="w-full text-center px-4 py-2 text-sm font-medium text-red-600 hover:bg-gray-100 hover:text-red-700 transition-colors"
               >
                 Logout
@@ -80,7 +99,10 @@ const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
             <div className="py-1">
               <Link
                 href="/login"
-                onClick={closeDropdown}
+                onClick={() => {
+                  closeDropdown();
+                  onAction?.();
+                }}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
               >
                 Login
@@ -88,7 +110,10 @@ const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
               <hr className="my-1" />
               <Link
                 href="/signup"
-                onClick={closeDropdown}
+                onClick={() => {
+                  closeDropdown();
+                  onAction?.();
+                }}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
               >
                 Signup

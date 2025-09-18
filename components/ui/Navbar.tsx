@@ -100,7 +100,11 @@ const Navbar: React.FC<NavbarProps> = ({ email, currentRole }) => {
             ))}
           </div>
           <div className="py-3 flex justify-center bg-gray-50">
-            <DropdownMenu email={email} />
+            <DropdownMenu
+              email={email}
+              onAction={() => setMobileMenuOpen(false)}
+              currentRole={currentRole}
+            />
           </div>
         </div>
       )}
