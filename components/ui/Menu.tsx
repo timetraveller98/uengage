@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -69,12 +68,13 @@ const DropdownMenu: React.FC<NavbarProps> = ({ email }) => {
                 Dashboard
               </Link>
               <hr className="my-1" />
-              <Button
+              <button
+                type="button"
                 onClick={handleLogout}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="w-full text-center px-4 py-2 text-sm font-medium text-red-600 hover:bg-gray-100 hover:text-red-700 transition-colors"
               >
                 Logout
-              </Button>
+              </button>
             </div>
           ) : (
             <div className="py-1">
