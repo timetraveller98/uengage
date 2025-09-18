@@ -1,4 +1,5 @@
 import FormatNumber from "./formatNumber";
+
 describe("FormatNumber utility", () => {
   it("formats thousands with commas", () => {
     expect(FormatNumber(1000)).toBe("1,000");
@@ -20,4 +21,3 @@ describe("FormatNumber utility", () => {
     expect(FormatNumber(-98765)).toBe("-98,765");
   });
 });
-

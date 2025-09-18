@@ -1,4 +1,5 @@
 import { loginSchema, signupSchema } from "./validations";
+
 describe("Zod Schemas", () => {
   describe("loginSchema", () => {
     it("should pass with valid email and password", () => {
@@ -33,7 +34,7 @@ describe("Zod Schemas", () => {
 
       if (!result.success) {
         expect(result.error.issues[0].message).toBe(
-          "Password must be at least 8 characters"
+          "Password must be at least 8 characters",
         );
       }
     });
@@ -89,7 +90,7 @@ describe("Zod Schemas", () => {
 
       if (!result.success) {
         expect(result.error.issues[0].message).toBe(
-          "Password must be at least 8 characters"
+          "Password must be at least 8 characters",
         );
       }
     });
