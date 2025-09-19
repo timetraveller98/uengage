@@ -1,5 +1,7 @@
 import AdminHeading from "@/components/ui/AdminHeading";
+import api from "@/utils/axios";
 import Summary from "./Summary";
+
 export const metadata = {
   title: "Admin Dashboard",
   description:
@@ -9,35 +11,33 @@ export const metadata = {
     canonical: "https://uengage-phi.vercel.app/admin",
   },
 };
-async function getData() {
-  const [userRes, postRes] = await Promise.all([
-    fetch("https://jsonplaceholder.typicode.com/users", {
-      cache: "no-store",
-    }),
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      cache: "no-store",
-    }),
-  ]);
 
-  if (!userRes.ok || !postRes.ok) {
-    throw new Error("Failed to fetch data");
-  }
+async function fetchUsers() {
+  const res = await api.get("/users");
+  return res.data;
+}
 
-  const users = await userRes.json();
-  const posts = await postRes.json();
-
-  return { users, posts };
+async function fetchPosts() {
+  const res = await api.get("/posts");
+  return res.data;
 }
 
 const Admin = async () => {
-  const { users, posts } = await getData();
-
-  return (
-    <main className="p-6">
-      <AdminHeading center title={"Admin Dashboard"} />
-      <Summary users={users} posts={posts} />
-    </main>
-  );
+  try {
+    const [users, posts] = await Promise.all([fetchUsers(), fetchPosts()]);
+    return (
+      <main className="p-6">
+        <AdminHeading center title="Admin Dashboard" />
+        <Summary users={users} posts={posts} />
+      </main>
+    );
+  } catch (error) {
+    return (
+      <div className="p-6 text-red-500">
+        Failed to load data: {String(error)}
+      </div>
+    );
+  }
 };
 
 export default Admin;
